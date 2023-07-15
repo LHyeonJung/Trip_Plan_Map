@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import * as SingUpStyles from "../css/SignUpStyles";
+import * as SignUpStyles from "../css/SignUpStyles";
 import signup_img from "../image/logo/signup.png";
+import globalStyles from "../css/globalStyles.module.scss";
 
 const SignUp = (props: any) => {
   type formInputs = {
@@ -18,7 +19,7 @@ const SignUp = (props: any) => {
   } = useForm<formInputs>();
   const history = useHistory();
 
-  const onClickSubmit = async (inputData: formInputs) => {
+  const onClickSubmit = useCallback(async (inputData: formInputs) => {
     try {
       const ret = await createUserWithEmailAndPassword(auth, inputData.email, inputData.password);
       console.log(ret);
@@ -30,20 +31,23 @@ const SignUp = (props: any) => {
         alert("이미 존재하는 계정입니다.");
       }
     }
-  };
+  }, []);
 
+  const onClickCancel = useCallback(() => {
+    history.push("/login");
+  }, []);
   return (
-    <div style={SingUpStyles.SignUpContainer}>
-      <div style={SingUpStyles.SignUpBox}>
-        <img style={SingUpStyles.signupImage} src={signup_img} alt="singup_image" />
+    <div style={SignUpStyles.SignUpContainer}>
+      <div style={SignUpStyles.SignUpBox}>
+        <img style={SignUpStyles.signupImage} src={signup_img} alt="singup_image" />
         <h2>회원 가입</h2>
-        <form style={SingUpStyles.SignUpForm}>
+        <form style={SignUpStyles.SignUpForm}>
           <div>
             <input
               type="email"
               id="email"
               placeholder="이메일"
-              style={SingUpStyles.inputField}
+              style={SignUpStyles.inputField}
               {...register("email", {
                 required: "이메일을 입력해주세요.",
                 pattern: {
@@ -59,7 +63,7 @@ const SignUp = (props: any) => {
               type="password"
               id="password"
               placeholder="비밀번호"
-              style={SingUpStyles.inputField}
+              style={SignUpStyles.inputField}
               {...register("password", {
                 required: "비밀번호를 입력해주세요.",
                 minLength: {
@@ -70,9 +74,10 @@ const SignUp = (props: any) => {
             />
             {errors.password && <p>{errors.password.message}</p>}
           </div>
-          <button style={SingUpStyles.submitButton} type="submit" onClick={handleSubmit(onClickSubmit)}>
-            등록
-          </button>
+          <div>
+            <input type="button" className={`${globalStyles.btn_basic} w120`} onClick={handleSubmit(onClickSubmit)} value="등록" />
+            <input type="button" className={`${globalStyles.cancelBtn_basic} w120`} onClick={onClickCancel} value="취소" />
+          </div>
         </form>
       </div>
     </div>

@@ -29,15 +29,7 @@ export const inputField: CSSProperties = {
   margin: "10px",
   padding: "7px",
   width: "300px",
-};
-
-export const submitButton: CSSProperties = {
-  padding: "10px 20px",
-  backgroundColor: "#435B66",
-  color: "white",
-  borderRadius: "5px",
-  cursor: "pointer",
-  width: "300px",
+  fontSize: "14px",
 };
 
 export const signupImage: CSSProperties = {

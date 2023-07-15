@@ -33,6 +33,7 @@ export const inputField: CSSProperties = {
   margin: "5px",
   padding: "7px",
   width: "300px",
+  fontSize: "14px",
 };
 
 export const submitButton: CSSProperties = {

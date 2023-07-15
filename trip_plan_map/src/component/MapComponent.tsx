@@ -2,9 +2,10 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { RootState } from "../modules/index";
 import * as Common from "../utils/Common";
-import { setKeyword, setResults } from "../modules/searchSlice";
-import * as mapStyles from "../css/MapStyles";
-// import "../css/MapStyles.css";
+import { setResults } from "../modules/searchSlice";
+import globalStyles from "../css/globalStyles.module.scss";
+import * as MapStyles from "../css/MapStyles";
+import "../css/MapStyles.css";
 
 declare global {
   interface Window {
@@ -66,10 +67,8 @@ function MapComponent() {
 
   // [헤더> 검색창을 통해 키워드 입력 시, 검색 결과 목록을 화면에 출력해주기 위함]
   useEffect(() => {
-    // setIsopenSearchResult(true);
     if (!Common.isNullOrEmpty(searchReducer.keyword)) {
       setIsopenSearchResult(true);
-      console.log("키워드 검색!!!" + searchReducer.keyword);
 
       // 키워드 검색 기능 구현
       let searchList: placeData[] = [];
@@ -89,6 +88,9 @@ function MapComponent() {
           }
         }
       });
+    } else {
+      dispatch(setResults([]));
+      setIsopenSearchResult(false);
     }
   }, [searchReducer.keyword]);
 
@@ -99,13 +101,6 @@ function MapComponent() {
       latitude: +item.y,
       longitude: +item.x,
     });
-  }, []);
-
-  // [검색 결과창 닫기]
-  const onClickSearchResultClose = useCallback(() => {
-    dispatch(setResults([]));
-    setIsopenSearchResult(false);
-    dispatch(setKeyword(""));
   }, []);
 
   useEffect(() => {
@@ -132,25 +127,25 @@ function MapComponent() {
 
   return (
     <div>
-      {/* 키워드 검색 결과*/}
-
-      <div style={{ ...mapStyles.popupContainer, display: isOpenSearchResult ? "flex" : "none" }}>
-        <div style={mapStyles.popupContent}>
-          <button style={mapStyles.closeButton} onClick={onClickSearchResultClose}>
-            &times;
-          </button>
-          <ul>
-            {searchReducer.results.map((result, index) => (
-              <li key={index} onClick={() => onClickPlace(result)}>
-                {result.place_name} [{result.address_name}]
-              </li>
-            ))}
-          </ul>
+      {/* 키워드 검색 결과 */}
+      {isOpenSearchResult ? (
+        <div style={MapStyles.searchResultPopup}>
+          <div>
+            <div className="search-results">
+              <ul className="results-list">
+                {searchReducer.results.map((result, index) => (
+                  <li style={{ marginBottom: "10px" }} className={globalStyles.cursor_pointer} key={index} onClick={() => onClickPlace(result)}>
+                    {result.place_name} [{result.address_name}]
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : null}
 
       {/* 지도 */}
-      <div id="map" style={mapStyles.map} />
+      <div id="map" className="map" />
     </div>
   );
 }
