@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState, useMemo, useCallback, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { RootState } from "../modules/index";
 import * as Common from "../utils/Common";
@@ -30,11 +30,12 @@ interface placeData {
 
 function MapComponent() {
   const dispatch = useDispatch();
+  const searchResultPopupRef = useRef<HTMLDivElement>(null);
   const searchReducer = useSelector((state: RootState) => state.search);
 
   const [currentLocation, setCurrentLocation] = useState<{ latitude: number; longitude: number } | string>(""); // 현재 위치 저장 (차후 선택/검색된 장소로 표시하도록 redux로 뺄 예정)
   const [searchLocation, setSearchLocation] = useState<{ latitude: number; longitude: number } | string>("");
-  const [isOpenSearchResult, setIsopenSearchResult] = useState<boolean>(false);
+  const [isOpenSearchResult, setIsOpenSearchResult] = useState<boolean>(false);
 
   useMemo(() => {
     // [현재 위치 정보를 state에 세팅]
@@ -65,10 +66,24 @@ function MapComponent() {
     }
   }, [currentLocation]);
 
+  // 팝업 외 영역 클릭 시, 팝업 닫히도록 리스너 로직 구현
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (searchResultPopupRef.current && !searchResultPopupRef.current.contains(event.target)) {
+        setIsOpenSearchResult(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   // [헤더> 검색창을 통해 키워드 입력 시, 검색 결과 목록을 화면에 출력해주기 위함]
   useEffect(() => {
     if (!Common.isNullOrEmpty(searchReducer.keyword)) {
-      setIsopenSearchResult(true);
+      setIsOpenSearchResult(true);
 
       // 키워드 검색 기능 구현
       let searchList: placeData[] = [];
@@ -84,13 +99,13 @@ function MapComponent() {
           dispatch(setResults(searchList));
 
           if (searchList.length < 1) {
-            setIsopenSearchResult(false);
+            setIsOpenSearchResult(false);
           }
         }
       });
     } else {
       dispatch(setResults([]));
-      setIsopenSearchResult(false);
+      setIsOpenSearchResult(false);
     }
   }, [searchReducer.keyword]);
 
@@ -129,7 +144,7 @@ function MapComponent() {
     <div>
       {/* 키워드 검색 결과 */}
       {isOpenSearchResult ? (
-        <div style={MapStyles.searchResultPopup}>
+        <div style={MapStyles.searchResultPopup} ref={searchResultPopupRef}>
           <div>
             <div className="search-results">
               <ul className="results-list">
