@@ -1906,3 +1906,120 @@
   cursor: default;
   cursor: not-allowed;
 }
+
+.radio {
+  transition: all 0.3s;
+  border-radius: 0.5rem 0.5rem 0 0;
+  font-size: 1rem;
+  min-width: 9.2rem;
+  background-color: #ced4da;
+  color: #6c757d;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0px 5px;
+  &.active {
+    background-color: #6c757d;
+    color: #eef2f5;
+    cursor: default;
+  }
+  &:hover {
+    background-color: #6c757d;
+    color: #eef2f5;
+  }
+}
+:global .tab_upbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .panels {
+    background: transparent;
+    width: 100%;
+    border-top: 0.1rem solid #6c757d;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    padding: 2rem 0;
+  }
+}
+
+:global .tab_upbar .panel-title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+:global .tab_upbar .radio {
+  display: none;
+}
+
+:global .tab_upbar .tab {
+  position: relative;
+  cursor: pointer;
+  padding: 0.3rem;
+  margin: 0 0.2rem;
+  background: #6c757d;
+  display: inline-block;
+  color: white;
+  border-radius: 0.3rem 0.3rem 0 0;
+  min-width: 5rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+  border-left: 0.1rem solid #6c757d;
+  border-right: 0.1rem solid #6c757d;
+}
+:global .tab_upbar .tab::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -0.1rem;
+  width: 100%;
+  height: 0.1rem;
+  background-color: white;
+}
+:global .tab_upbar .panel {
+  display: none;
+  animation: fadein 0.8s;
+}
+:global .tab_upbar .panel > p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+:global .tab_upbar .one:checked ~ .panels .one-panel,
+:global .tab_upbar .two:checked ~ .panels .two-panel,
+:global .tab_upbar .three:checked ~ .panels .three-panel,
+:global .tab_upbar .four:checked ~ .panels .four-panel,
+:global .tab_upbar .five:checked ~ .panels .five-panel,
+:global .tab_upbar .six:checked ~ .panels .six-panel,
+:global .tab_upbar .seven:checked ~ .panels .seven-panel,
+:global .tab_upbar .eight:checked ~ .panels .eight-panel,
+:global .tab_upbar .nine:checked ~ .panels .nine-panel,
+:global .tab_upbar .ten:checked ~ .panels .ten-panel,
+:global .tab_upbar .eleven:checked ~ .panels .eleven-panel,
+:global .tab_upbar .twelve:checked ~ .panels .twelve-panel,
+:global .tab_upbar .thirteen:checked ~ .panels .thirteen-panel,
+:global .tab_upbar .fourteen:checked ~ .panels .fourteen-panel,
+:global .tab_upbar .fifteen:checked ~ .panels .fifteen-panel {
+  display: block;
+}
+
+:global .tab_upbar .one:checked ~ .tabs .one-tab,
+:global .tab_upbar .two:checked ~ .tabs .two-tab,
+:global .tab_upbar .three:checked ~ .tabs .three-tab,
+:global .tab_upbar .four:checked ~ .tabs .four-tab,
+:global .tab_upbar .five:checked ~ .tabs .five-tab,
+:global .tab_upbar .six:checked ~ .tabs .six-tab,
+:global .tab_upbar .seven:checked ~ .tabs .seven-tab,
+:global .tab_upbar .eight:checked ~ .tabs .eight-tab,
+:global .tab_upbar .nine:checked ~ .tabs .nine-tab,
+:global .tab_upbar .ten:checked ~ .tabs .ten-tab,
+:global .tab_upbar .eleven:checked ~ .tabs .eleven-tab,
+:global .tab_upbar .twelve:checked ~ .tabs .twelve-tab,
+:global .tab_upbar .thirteen:checked ~ .tabs .thirteen-tab,
+:global .tab_upbar .fourteen:checked ~ .tabs .fourteen-tab,
+:global .tab_upbar .fifteen:checked ~ .tabs .fifteen-tab {
+  background: white;
+  font-size: 1rem;
+  font-weight: 200;
+  color: #1f2b41;
+  border-top: 0.3rem solid #6375eb;
+}

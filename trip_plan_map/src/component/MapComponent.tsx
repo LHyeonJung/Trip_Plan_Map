@@ -33,7 +33,7 @@ function MapComponent() {
   const searchResultPopupRef = useRef<HTMLDivElement>(null);
   const searchReducer = useSelector((state: RootState) => state.search);
 
-  const [currentLocation, setCurrentLocation] = useState<{ latitude: number; longitude: number } | string>(""); // 현재 위치 저장 (차후 선택/검색된 장소로 표시하도록 redux로 뺄 예정)
+  const [currentLocation, setCurrentLocation] = useState<{ latitude: number; longitude: number } | string>(""); // 현재 위치(위도, 경도) 저장 (차후 선택/검색된 장소로 표시하도록 redux로 뺄 예정)
   const [searchLocation, setSearchLocation] = useState<{ latitude: number; longitude: number } | string>("");
   const [isOpenSearchResult, setIsOpenSearchResult] = useState<boolean>(false);
 
@@ -111,6 +111,7 @@ function MapComponent() {
 
   // [검색 결과 목록 중, 특정 장소 클릭 시 해당 위치로 핀 이동]
   const onClickPlace = useCallback((item: placeData) => {
+    console.log(item);
     console.log(+item.x);
     setSearchLocation({
       latitude: +item.y,
