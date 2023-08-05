@@ -30,8 +30,8 @@ export const menuPopup: CSSProperties = {
   maxHeight: "50rem",
 };
 
-export const placeList: CSSProperties = {
-  maxHeight: "15rem",
+export const tabContents: CSSProperties = {
+  maxHeight: "20rem",
   overflowY: "auto",
 };
 
@@ -96,6 +96,58 @@ export const memoItemBox: CSSProperties = {
 export const memoPopupCloseButton: CSSProperties = {
   marginTop: "8px",
   fontSize: "15px",
+};
+
+export const createGroupPopup: CSSProperties = {
+  paddingTop: "1rem",
+  position: "absolute",
+  top: "10%",
+  left: "100%",
+  marginTop: "63px",
+  zIndex: "20",
+  background: "#FAF3F0",
+  border: "1px solid #ccc",
+  boxShadow: "0 3px 10px rgba(0,0,0,0.2)",
+  width: "17rem",
+  height: "12rem",
+  padding: "10px",
+};
+
+export const groupDetail: CSSProperties = {
+  paddingLeft: "0.5rem",
+  paddingRight: "0.5rem",
+};
+
+export const groupDetailLabel: CSSProperties = {
+  border: "solid black 1px",
+};
+
+export const groupDetailItemBox: CSSProperties = {
+  width: "100%",
+  // height: "100px",
+  border: "solid black 1px",
+  margin: "0 auto",
+  overflowWrap: "normal",
+  maxHeight: "10rem",
+  overflowY: "auto",
+};
+
+export const groupDetailItem: CSSProperties = {
+  padding: "0.5rem",
+  fontSize: "13px",
+  borderBottom: "solid black 1px",
+  width: "100%",
+  justifyContent: "left",
+  display: "flex",
+  maxWidth: "100%",
+  wordBreak: "break-all",
+};
+
+export const basicBtn: CSSProperties = {
+  background: "white",
+  color: "black",
+  border: "1px solid black",
+  fontSize: "12px",
 };
 
 export const label: CSSProperties = {

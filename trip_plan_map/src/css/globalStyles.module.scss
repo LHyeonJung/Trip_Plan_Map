@@ -2023,3 +2023,62 @@
   color: #1f2b41;
   border-top: 0.3rem solid #6375eb;
 }
+
+:global .popup-contents section {
+  padding: 1rem 0;
+}
+
+:global .popup-contents {
+  padding: 1rem 0;
+  max-height: 60rem;
+  overflow-y: auto;
+}
+
+:global .form-info-container {
+  padding-bottom: 3rem;
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+:global section.form-info {
+  display: flex !important;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1%;
+  margin-bottom: 0.5rem;
+  border: 0.1rem solid var(--clr-light-cyan);
+}
+
+:global section .form-item > div {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  color: var(--clr-primary);
+  margin: auto 0;
+  width: calc(100% - 15rem);
+  > p {
+    line-height: 1.5;
+  }
+}
+
+:global section .form-item {
+  display: flex;
+  align-items: stretch;
+}
+:global section .form-item.col-2 {
+  width: calc(50% - 0.5%);
+  max-width: 500px;
+}
+:global section .form-item.col-1 {
+  width: 100%;
+}
+:global section .form-item > label {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  min-height: 4rem;
+  line-height: 4rem;
+  background-color: var(--clr-light-cyan);
+  align-items: stretch;
+}
