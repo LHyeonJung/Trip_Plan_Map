@@ -31,7 +31,7 @@ export const menuPopup: CSSProperties = {
 };
 
 export const tabContents: CSSProperties = {
-  maxHeight: "20rem",
+  maxHeight: "24rem",
   overflowY: "auto",
 };
 

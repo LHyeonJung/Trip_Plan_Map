@@ -2082,3 +2082,7 @@
   background-color: var(--clr-light-cyan);
   align-items: stretch;
 }
+
+:global .text-center {
+  text-align: center !important;
+}
